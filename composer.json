@@ -1,5 +1,5 @@
 {
-    "name": "rare/yii2-moysklad",
+    "name": "metaseller/rare_moysklad",
     "description": "Расширения для работы мой склад через апи JSON API 1.2",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
