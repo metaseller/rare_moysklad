@@ -35,7 +35,7 @@ class MoySklad{
      * @param $posToken
      * @return MoySklad
      */
-    public static function getInstance($access_token, $subdomain = "online", $posToken = null){
+    public static function getInstance($access_token, $subdomain = "api", $posToken = null){
         $hash = $access_token;
         if ( empty(static::$instances[$hash]) ){
             static::$instances[$hash] = new static($access_token, $hash, $subdomain);
