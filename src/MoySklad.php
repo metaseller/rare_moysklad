@@ -10,19 +10,19 @@ class MoySklad{
     /**
      * @var MoySkladHttpClient
      */
-    private $client;
+    protected $client;
 
     /**
      * @var string
      */
-    private $hashCode;
+    protected $hashCode;
 
     /**
      * @var MoySklad[]
      */
-    private static $instances = [];
+    protected static $instances = [];
 
-    private function __construct($access_token, $hashCode, $subdomain = "online")
+    protected function __construct($access_token, $hashCode, $subdomain = "api")
     {
         $this->client = new MoySkladHttpClient($access_token, $subdomain);
         $this->hashCode = $hashCode;

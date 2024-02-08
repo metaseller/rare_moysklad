@@ -18,13 +18,13 @@ class MoySkladHttpClient
         METHOD_DELETE = "DELETE",
         HTTP_CODE_SUCCESS = [200, 201, 307, 303];
 
-    private $preRequestSleepTime = 200;
+    protected $preRequestSleepTime = 200;
 
-    private
-        $posEndpoint = "https://online.moysklad.ru/api/posap/1.0/",
+    protected
+        $posEndpoint = "https://api.moysklad.ru/api/posap/1.0/",
         $access_token;
 
-    public function __construct($access_token, $subdomain = "online")
+    public function __construct($access_token, $subdomain = "api")
     {
         $this->access_token = $access_token;
         $this->endpoint = "https://" . $subdomain . ".moysklad.ru/api/remap/1.2/";
@@ -112,6 +112,7 @@ class MoySkladHttpClient
     {
         if (empty($options['headers']['Authorization'])) {
             $options['headers']['Authorization'] = "Bearer " . $this->access_token;
+            $options['headers']['Accept-Encoding'] = 'gzip';
         }
 
         $client = new Client();
@@ -141,7 +142,7 @@ class MoySkladHttpClient
      * @return string
      * @throws \Throwable
      */
-    private function makeRequest(
+    protected function makeRequest(
         $requestHttpMethod,
         $apiMethod,
         $data = [],
@@ -151,7 +152,8 @@ class MoySkladHttpClient
         if (!$options) $options = new RequestConfig();
 
         $headers = [
-            "Authorization" => "Bearer " . $this->access_token
+            "Authorization" => "Bearer " . $this->access_token,
+            'Accept-Encoding' => 'gzip',
         ];
         $config = [
             "base_uri" => $this->endpoint,
